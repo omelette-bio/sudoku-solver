@@ -1,5 +1,36 @@
 class Main {
-    public static void main (String[] args) {
+    public static void print_grid(int[][] grid)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            if (i%3 == 0)
+                System.out.println("------------");
+
+            for (int j = 0; j < 9; j++)
+            {
+                if (j%3 == 0)
+                    System.out.print("|");
+
+                if (grid[i][j] == -1)
+                    System.out.print(" ");
+                else
+                    System.out.print(grid[i][j]);
+            }
+            System.out.print("|\n");
+        }
+    }
+
+    public static void main(String[] args) {
+        int[][] grid = {{-1,-1,1,-1,-1,3,9,-1,2},
+                {-1,4,-1,-1,6,7,8,-1,-1},
+                {-1,-1,-1,9,-1,8,-1,-1,7},
+                {1,-1,2,-1,-1,-1,-1,-1,-1},
+                {5,9,8,6,2,-1,7,-1,-1},
+                {7,-1,4,3,-1,-1,-1,9,1},
+                {-1,-1,7,-1,-1,9,-1,8,6},
+                {9,1,-1,8,-1,6,3,-1,4},
+                {6,-1,-1,-1,4,2,1,-1,-1}};
+        print_grid(grid);
         /*
         exemple de grille de sudoku en entree
 
