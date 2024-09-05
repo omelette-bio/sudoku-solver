@@ -7,5 +7,8 @@ public class Cell
     // tableau permettant de determiner ce qui est possible sur cette cellule (vide si aucune valeur)
     int[] possible_values;
 
+    public Cell(int value) { this.value = value; }
 
+    public int getValue() { return value; }
+    public void setValue(int value) { this.value = value; }
 }
