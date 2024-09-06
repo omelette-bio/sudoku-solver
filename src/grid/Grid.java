@@ -9,29 +9,34 @@ public class Grid {
      */
 
     // test
-    private final int[][] lines = new int[9][9];
-    private final int[][] columns = new int[9][9];
+    private final Cell[][] lines = new Cell[9][9];
+    private final Cell[][] columns = new Cell[9][9];
+    private final Cell[][] squares = new Cell[9][9];
 
     public Grid(int[] grid)
     {
         // le tableau principal
         for (int i = 0; i < 81; i++) this.grid[i] = new Cell(grid[i], i);
         // obtenir les lignes
-        for (int j = 0; j < 81; j++) this.lines[j/9][j%9] = grid[j];
-        for (int j = 0; j < 81; j++) this.columns[j%9][j/9] = grid[j];
+        for (int j = 0; j < 81; j++) this.lines[j/9][j%9] = this.grid[j];
+        for (int j = 0; j < 81; j++) this.columns[j%9][j/9] = this.grid[j];
+        for (int j = 0; j < 81; j++)
+        {
+            squares[this.grid[j].getS_pos()][ (this.grid[j].getX_pos()%3)*3 + this.grid[j].getY_pos()%3] = this.grid[j];
+        }
     }
 
-//    public void print_lines()
-//    {
-//        for (int i = 0; i < 9; i++)
-//        {
-//            for (int j = 0; j < 9; j++)
-//            {
-//                System.out.print(lines[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//    }
+    public void print_square()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                System.out.print(squares[i][j].getValue() + " ");
+            }
+            System.out.println();
+        }
+    }
 //
 //    public void print_columns()
 //    {
@@ -58,8 +63,8 @@ public class Grid {
         {
             if (grid[i].getValue() == -1) {
                 grid[i].resetPossibleValues();
-                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(lines[grid[i].getY_pos()][j]);
-                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(columns[grid[i].getX_pos()][j]);
+                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(lines[grid[i].getY_pos()][j].getValue());
+                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(columns[grid[i].getX_pos()][j].getValue());
             }
         }
     }
