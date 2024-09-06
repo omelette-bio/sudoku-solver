@@ -1,3 +1,5 @@
+import deduction.DR1;
+import deduction.DeductionRule;
 import grid.*;
 
 class Main {
@@ -5,17 +7,24 @@ class Main {
         Grid grid0 = new Grid(
                 new int[] {-1,-1,1,-1,-1,3,9,-1,2,-1,4,-1,-1,6,7,8,-1,-1,-1,-1,-1,9,-1,8,-1,-1,7,1,-1,2,-1,-1,-1,-1,-1,-1,5,9,8,6,2,-1,7,-1,-1,7,-1,4,3,-1,-1,-1,9,1,-1,-1,7,-1,-1,9,-1,8,6,9,1,-1,8,-1,6,3,-1,4,6,-1,-1,-1,4,2,1,-1,-1}
                     );
-//        grid0.print();
-//
-        grid0.updatePossibleValues();
-        System.out.println(grid0.get_possible_values(0));
 
-        grid0.print();
-        grid0.print_square();
+        DeductionRule d = new DR1();
+        for (int i = 0; i < 5; i++)
+        {
+            grid0.updatePossibleValues();
+            d.run(grid0);
+            grid0.print();
+        }
+
 
 //        Grid grid1 = new Grid(
 //                new int[] {3,4,2,-1,8,-1,-1,-1,-1,5,-1,-1,9,-1,-1,-1,2,-1,-1,9,-1,-1,-1,4,3,8,-1,-1,2,-1,3,-1,5,1,-1,-1,-1,5,-1,7,-1,6,-1,4,-1,-1,7,-1,-1,9,1,6,5,2,6,-1,-1,-1,7,9,2,3,1,7,-1,-1,-1,6,-1,8,-1,-1,2,-1,-1,5,3,-1,4,-1,-1}
 //        );
-//        grid1.print();
+//        for (int i = 0; i < 5; i++)
+//        {
+//            grid1.updatePossibleValues();
+//            d.run(grid1);
+//            grid1.print();
+//        }
     }
 }

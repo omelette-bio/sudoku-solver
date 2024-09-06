@@ -11,6 +11,7 @@ public class Cell
     private final int x_pos;
     private final int y_pos;
     private final int s_pos;
+    private final int s_x_pos;
 
     public Cell(int value, int pos) {
         this.value = value;
@@ -32,6 +33,7 @@ public class Cell
             else if ((y_pos >= 3) && (y_pos < 6)) s_pos = 7;
             else s_pos = 8;
         }
+        s_x_pos = (x_pos%3)*3 + y_pos%3;
     }
 
     public int getValue() { return value; }
@@ -40,6 +42,7 @@ public class Cell
     public int getX_pos() { return x_pos; }
     public int getY_pos() { return y_pos; }
     public int getS_pos() { return s_pos; }
+    public int getS_x_pos() { return s_x_pos; }
 
     public HashSet<Integer> getPossibleValues() { return possible_values; }
     public void removePossibleValue(int value) { possible_values.remove(value); }

@@ -20,10 +20,7 @@ public class Grid {
         // obtenir les lignes
         for (int j = 0; j < 81; j++) this.lines[j/9][j%9] = this.grid[j];
         for (int j = 0; j < 81; j++) this.columns[j%9][j/9] = this.grid[j];
-        for (int j = 0; j < 81; j++)
-        {
-            squares[this.grid[j].getS_pos()][ (this.grid[j].getX_pos()%3)*3 + this.grid[j].getY_pos()%3] = this.grid[j];
-        }
+        for (int j = 0; j < 81; j++) this.squares[this.grid[j].getS_pos()][this.grid[j].getS_x_pos()] = this.grid[j];
     }
 
     public void print_square()
@@ -36,6 +33,11 @@ public class Grid {
             }
             System.out.println();
         }
+    }
+
+    public Cell getCell(int i)
+    {
+        return grid[i];
     }
 //
 //    public void print_columns()
@@ -63,8 +65,9 @@ public class Grid {
         {
             if (grid[i].getValue() == -1) {
                 grid[i].resetPossibleValues();
-                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(lines[grid[i].getY_pos()][j].getValue());
-                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(columns[grid[i].getX_pos()][j].getValue());
+                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(lines[grid[i].getX_pos()][j].getValue());
+                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(columns[grid[i].getY_pos()][j].getValue());
+                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(squares[grid[i].getS_pos()][j].getValue());
             }
         }
     }
