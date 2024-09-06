@@ -1,12 +1,52 @@
 package grid;
+import java.util.HashSet;
 
 public class Grid {
-    private final Cell[] grid = new Cell[81]; // contiendra des Cell
+    private final Cell[] grid = new Cell[81];
+
+    /*
+    peut-etre des tableaux de cell pour ligne, colonne et carres
+     */
+
+    // test
+    private final int[][] lines = new int[9][9];
+    private final int[][] columns = new int[9][9];
 
     public Grid(int[] grid)
     {
-        for (int i = 0; i < 81; i++) this.grid[i] = new Cell(grid[i]);
+        // le tableau principal
+        for (int i = 0; i < 81; i++) this.grid[i] = new Cell(grid[i], i);
+        // obtenir les lignes
+        for (int j = 0; j < 81; j++) this.lines[j/9][j%9] = grid[j];
+        for (int j = 0; j < 81; j++) this.columns[j%9][j/9] = grid[j];
     }
+
+//    public void print_lines()
+//    {
+//        for (int i = 0; i < 9; i++)
+//        {
+//            for (int j = 0; j < 9; j++)
+//            {
+//                System.out.print(lines[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
+//    }
+//
+//    public void print_columns()
+//    {
+//        for (int i = 0; i < 9; i++)
+//        {
+//            for (int j = 0; j < 9; j++)
+//            {
+//                System.out.print(columns[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
+//    }
+
+    // juste une fonction de test
+    public void print_square_pos(int i) { System.out.println(grid[i].getS_pos());}
 
     // fonction pour convertir des coordonnes 2D en une coordonnee 1D
     // (pratique pour naviguer dans une matrice linearisee)
@@ -14,9 +54,17 @@ public class Grid {
 
     public void updatePossibleValues()
     {
-        // faut reflechir
+        for (int i = 0; i < 81; i++)
+        {
+            if (grid[i].getValue() == -1) {
+                grid[i].resetPossibleValues();
+                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(lines[grid[i].getY_pos()][j]);
+                for (int j = 0; j < 9; j++) grid[i].removePossibleValue(columns[grid[i].getX_pos()][j]);
+            }
+        }
     }
 
+    public HashSet<Integer> get_possible_values(int i) { return grid[i].getPossibleValues(); }
 
     // fonction de print pour afficher toute la grille
     public void print()
