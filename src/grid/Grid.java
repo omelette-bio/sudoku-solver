@@ -21,6 +21,7 @@ public class Grid {
         for (int j = 0; j < 81; j++) this.lines[j/9][j%9] = this.grid[j];
         for (int j = 0; j < 81; j++) this.columns[j%9][j/9] = this.grid[j];
         for (int j = 0; j < 81; j++) this.squares[this.grid[j].getS_pos()][this.grid[j].getS_x_pos()] = this.grid[j];
+        this.updatePossibleValues();
     }
 
     public void print_square()
