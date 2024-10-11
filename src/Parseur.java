@@ -4,9 +4,9 @@ import java.util.Scanner; // Import the Scanner class to read text files
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 public class Parseur {
-    public static int[] Parse(String[] filename) {
+    public static int[] Parse(String filename) {
         try {
-            File myObj = new File("filename.txt");
+            File myObj = new File(filename);
             Scanner myReader = new Scanner(myObj);
             int[] res = new int[81];
             int i = 0;

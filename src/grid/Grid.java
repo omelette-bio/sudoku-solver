@@ -64,7 +64,7 @@ public class Grid {
     {
         for (int i = 0; i < 81; i++)
         {
-            if (grid[i].getValue() == -1) {
+            if (grid[i].getValue() == 0) {
                 grid[i].resetPossibleValues();
                 for (int j = 0; j < 9; j++) grid[i].removePossibleValue(lines[grid[i].getX_pos()][j].getValue());
                 for (int j = 0; j < 9; j++) grid[i].removePossibleValue(columns[grid[i].getY_pos()][j].getValue());
@@ -88,7 +88,7 @@ public class Grid {
             {
                 if (j%3 == 0) System.out.print(" !");
 
-                if (grid[Change2DIndexTo1D(i,j)].getValue() == -1)
+                if (grid[Change2DIndexTo1D(i,j)].getValue() == 0)
                     System.out.print("  ");
                 else
                     System.out.print(" " + grid[Change2DIndexTo1D(i,j)].getValue());

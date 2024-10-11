@@ -4,10 +4,11 @@ import grid.*;
 
 class Main {
     public static void main(String[] args) {
-        Grid grid0 = new Grid(
-                new int[] {-1,-1,1,-1,-1,3,9,-1,2,-1,4,-1,-1,6,7,8,-1,-1,-1,-1,-1,9,-1,8,-1,-1,7,1,-1,2,-1,-1,-1,-1,-1,-1,5,9,8,6,2,-1,7,-1,-1,7,-1,4,3,-1,-1,-1,9,1,-1,-1,7,-1,-1,9,-1,8,6,9,1,-1,8,-1,6,3,-1,4,6,-1,-1,-1,4,2,1,-1,-1}
-                    );
+        int[] grid = Parseur.Parse(args[0]);
+
+        Grid grid0 = new Grid(grid);
         grid0.print();
+
         DeductionRule d = new DR1();
         for (int i = 0; i < 3; i++)
         {
