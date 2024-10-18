@@ -36,6 +36,21 @@ public class Grid {
         }
     }
 
+    public Cell[][] getLines()
+    {
+        return lines;
+    }
+
+    public Cell[][] getCols()
+    {
+        return columns;
+    }
+
+    public Cell[][] getSquares()
+    {
+        return squares;
+    }
+
     public Cell getCell(int i)
     {
         return grid[i];
