@@ -1,4 +1,5 @@
 package grid;
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class Grid {
@@ -55,18 +56,6 @@ public class Grid {
     {
         return grid[i];
     }
-//
-//    public void print_columns()
-//    {
-//        for (int i = 0; i < 9; i++)
-//        {
-//            for (int j = 0; j < 9; j++)
-//            {
-//                System.out.print(columns[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//    }
 
     // juste une fonction de test
     public void print_square_pos(int i) { System.out.println(grid[i].getS_pos());}
@@ -111,5 +100,28 @@ public class Grid {
             System.out.print(" !\n");
         }
         System.out.println(" =========================");
+    }
+
+    private boolean checkSection(Cell[] section)
+    {
+        HashSet<Integer> possible_values = new HashSet<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+        for (int j=0; j<9; j++)
+        {
+            possible_values.remove(section[j].getValue());
+        }
+        return possible_values.isEmpty();
+    }
+
+    public boolean checkComplete()
+    {
+        boolean goodme = true;
+        for (int i=0; i<9; i++)
+        {
+            goodme = goodme & checkSection(lines[i]);
+            goodme = goodme & checkSection(columns[i]);
+            goodme = goodme & checkSection(squares[i]);
+            if (goodme == false) return false;
+        }
+        return true;
     }
 }
