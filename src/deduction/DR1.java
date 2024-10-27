@@ -8,6 +8,16 @@ import grid.Cell;
 import grid.Grid;
 
 public class DR1 extends DeductionRule {
+    private static DR1 instance = null;
+
+    private DR1() {}
+
+    public static DR1 getInstance()
+    {
+        if (instance == null) instance = new DR1();
+        return instance;
+    }
+
     @Override
     public void run(Grid grid)
     {
@@ -19,6 +29,8 @@ public class DR1 extends DeductionRule {
             processGridSection(grid.getCols()[i]);
             processGridSection(grid.getSquares()[i]);
         }
+
+        grid.updatePossibleValues();
     }
 
     private void processGridSection(Cell[] section)

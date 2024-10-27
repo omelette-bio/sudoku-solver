@@ -5,11 +5,8 @@ import java.util.HashSet;
 public class Grid {
     private final Cell[] grid = new Cell[81];
 
-    /*
-    peut-etre des tableaux de cell pour ligne, colonne et carres
-     */
-
-    // test
+    // on cree trois tableaux, representant les lignes, les colonnes et les carres
+    // cela nous permet de mieux circuler dans la grille
     private final Cell[][] lines = new Cell[9][9];
     private final Cell[][] columns = new Cell[9][9];
     private final Cell[][] squares = new Cell[9][9];
@@ -23,18 +20,6 @@ public class Grid {
         for (int j = 0; j < 81; j++) this.columns[j%9][j/9] = this.grid[j];
         for (int j = 0; j < 81; j++) this.squares[this.grid[j].getS_pos()][this.grid[j].getS_x_pos()] = this.grid[j];
         this.updatePossibleValues();
-    }
-
-    public void print_square()
-    {
-        for (int i = 0; i < 9; i++)
-        {
-            for (int j = 0; j < 9; j++)
-            {
-                System.out.print(squares[i][j].getValue() + " ");
-            }
-            System.out.println();
-        }
     }
 
     public Cell[][] getLines()
@@ -57,9 +42,6 @@ public class Grid {
         return grid[i];
     }
 
-    // juste une fonction de test
-    public void print_square_pos(int i) { System.out.println(grid[i].getS_pos());}
-
     // fonction pour convertir des coordonnes 2D en une coordonnee 1D
     // (pratique pour naviguer dans une matrice linearisee)
     private int Change2DIndexTo1D(int i, int j) { return i*9 + j; }
@@ -76,8 +58,6 @@ public class Grid {
             }
         }
     }
-
-    public HashSet<Integer> get_possible_values(int i) { return grid[i].getPossibleValues(); }
 
     // fonction de print pour afficher toute la grille
     public void print()

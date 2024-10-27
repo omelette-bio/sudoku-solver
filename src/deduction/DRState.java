@@ -1,21 +1,13 @@
 package deduction;
 
+// classe utilitaire qui nous permet de tourner entre toutes les DR
 public class DRState
 {
-    private static DRState instance = null;
     // si on ajoute une DR, on a juste a l'ajouter a la liste
-    private static final DeductionRule[] sequence = { new DR1(), new DR2() };
+    private static final DeductionRule[] sequence = { DR1.getInstance(), DR2.getInstance() };
     private static int cur_i = 0;
 
-    private DRState()
-    {
-
-    }
-
-    public static void getInstance()
-    {
-        if (instance == null) instance = new DRState();
-    }
+    private DRState() {}
 
     public static DeductionRule next()
     {

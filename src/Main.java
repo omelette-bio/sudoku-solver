@@ -8,7 +8,6 @@ class Main {
 
         Grid grid0 = new Grid(grid);
         grid0.print();
-        DRState.getInstance();
 
         for (int i = 0; i < 10; i++)
         {

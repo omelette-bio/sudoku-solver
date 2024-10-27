@@ -3,7 +3,7 @@ import java.util.HashSet;
 
 public class Cell
 {
-    private int value; // -1 si pas de valeur et 1 a 9 sinon
+    private int value; // 0 si pas de valeur et 1 a 9 sinon
 
     // tableau permettant de determiner ce qui est possible sur cette cellule (vide si aucune valeur)
     HashSet<Integer> possible_values = new HashSet<>();

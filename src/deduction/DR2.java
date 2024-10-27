@@ -5,6 +5,16 @@ import grid.Grid;
 import java.util.ArrayList;
 
 public class DR2 extends DeductionRule{
+    private static DR2 instance = null;
+
+    private DR2() {}
+
+    public static DR2 getInstance()
+    {
+        if (instance == null) instance = new DR2();
+        return instance;
+    }
+
     @Override
     public void run(Grid grid)
     {
