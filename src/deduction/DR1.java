@@ -19,22 +19,27 @@ public class DR1 extends DeductionRule {
     }
 
     @Override
-    public void run(Grid grid)
+    public boolean run(Grid grid)
     {
+        boolean modified = false;
         System.out.println("Execution de la DR1...");
 
         for (int i = 0; i < 9; i++)
         {
-            processGridSection(grid.getLines()[i]);
-            processGridSection(grid.getCols()[i]);
-            processGridSection(grid.getSquares()[i]);
+            modified = modified | processGridSection(grid.getLines()[i]);
+            modified = modified | processGridSection(grid.getCols()[i]);
+            modified = modified | processGridSection(grid.getSquares()[i]);
         }
 
         grid.updatePossibleValues();
+        grid.refreshStructure();
+
+        return modified;
     }
 
-    private void processGridSection(Cell[] section)
+    private boolean processGridSection(Cell[] section)
     {
+        boolean modified = false;
         int empty_index = -1;
         boolean modify = false;
         HashSet<Integer> possible_values = new HashSet<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
@@ -57,6 +62,9 @@ public class DR1 extends DeductionRule {
         {
             ArrayList<Integer> list = new ArrayList<>(possible_values);
             section[empty_index].setValue(list.getFirst());
+            modified = true;
         }
+
+        return modified;
     }
 }

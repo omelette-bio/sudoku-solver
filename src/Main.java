@@ -7,12 +7,20 @@ class Main {
         int[] grid = Parseur.Parse(args[0]);
 
         Grid grid0 = new Grid(grid);
+
+        DeductionRule dr = DRState.next();
+
         grid0.print();
 
-        for (int i = 0; i < 10; i++)
+
+        while (!grid0.checkComplete())
         {
-            DRState.next().run(grid0);
-            if (grid0.checkComplete()) break;
+            boolean res = dr.run(grid0);
+            if (!res)
+            {
+                if (DRState.getCurIndex() == 2) System.out.println("inputme");
+                dr = DRState.next();
+            }
         }
 
         grid0.print();

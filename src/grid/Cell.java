@@ -1,4 +1,5 @@
 package grid;
+import java.util.Collection;
 import java.util.HashSet;
 
 public class Cell
@@ -47,4 +48,5 @@ public class Cell
     public HashSet<Integer> getPossibleValues() { return possible_values; }
     public void removePossibleValue(int value) { possible_values.remove(value); }
     public void resetPossibleValues() { for(int i = 1; i <= 9; i++) possible_values.add(i); }
+    public void removeAll(HashSet<Integer> compare) { possible_values.removeAll(compare); }
 }

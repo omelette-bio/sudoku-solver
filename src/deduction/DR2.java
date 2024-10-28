@@ -16,15 +16,21 @@ public class DR2 extends DeductionRule{
     }
 
     @Override
-    public void run(Grid grid)
+    public boolean run(Grid grid)
     {
+        boolean modified = false;
         System.out.println("Execution de la DR2...");
         for (int i = 0; i < 81; i++)
         {
             ArrayList<Integer> list = new ArrayList<>(grid.getCell(i).getPossibleValues());
-            if (list.size() == 1) grid.getCell(i).setValue(list.getFirst());
-
-            grid.updatePossibleValues();
+            if (list.size() == 1)
+            {
+                grid.getCell(i).setValue(list.getFirst());
+                grid.updatePossibleValues();
+                grid.refreshStructure();
+                modified = true;
+            }
         }
+        return modified;
     }
 }

@@ -104,4 +104,22 @@ public class Grid {
         }
         return true;
     }
+
+    public void print_possible_values()
+    {
+        for (int i=0; i<81; i++)
+        {
+            System.out.print(grid[i].getPossibleValues());
+            if (i%9 == 0) System.out.println();
+        }
+    }
+
+    public void refreshStructure() {
+        for (int j = 0; j < 81; j++) {
+            this.lines[j / 9][j % 9] = this.grid[j];
+            this.columns[j % 9][j / 9] = this.grid[j];
+            this.squares[this.grid[j].getS_pos()][this.grid[j].getS_x_pos()] = this.grid[j];
+        }
+    }
+
 }
