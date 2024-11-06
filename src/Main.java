@@ -5,6 +5,7 @@ import grid.Grid;
 class Main {
     public static void main(String[] args) {
         int[] grid = Parseur.Parse(args[0]);
+        int echecs = 0;
 
         Grid grid0 = new Grid(grid);
 
@@ -16,11 +17,14 @@ class Main {
         while (!grid0.checkComplete())
         {
             boolean res = dr.run(grid0);
+
             if (!res)
             {
-                if (DRState.getCurIndex() == 2) System.out.println("inputme");
+                echecs++;
+                if ((echecs == 3) || (echecs > 1 && DRState.getCurIndex() == 2)) grid0.getInput();
                 dr = DRState.next();
             }
+            else echecs = 0;
         }
 
         grid0.print();

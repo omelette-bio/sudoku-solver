@@ -66,11 +66,13 @@ public class Grid {
 
         for (int i = 0; i < 9; i++)
         {
-            if (i%3 == 0) System.out.println(" =========================");
+            if (i == 0) System.out.println("    1 2 3   4 5 6   7 8 9  ");
+            if (i%3 == 0) System.out.println("  =========================");
 
             for (int j = 0; j < 9; j++)
             {
-                if (j%3 == 0) System.out.print(" !");
+                if (j == 0) System.out.printf("%d !", i+1);
+                else if (j%3 == 0) System.out.print(" !");
 
                 if (grid[Change2DIndexTo1D(i,j)].getValue() == 0)
                     System.out.print("  ");
@@ -79,7 +81,7 @@ public class Grid {
             }
             System.out.print(" !\n");
         }
-        System.out.println(" =========================");
+        System.out.println("  =========================");
     }
 
     private boolean checkSection(Cell[] section)
@@ -122,4 +124,32 @@ public class Grid {
         }
     }
 
+    public void getInput()
+    {
+        int i,j,value;
+        boolean modifiable = false;
+
+        System.out.println("Le solver ne trouve plus de solution, veuillez entrer une case pour debloquer la situation.");
+
+        while (!modifiable){
+
+            int[] input = ReadInput.PlayerInput();
+
+            i = input[0]-1;
+            j = input[1]-1;
+            value = input[2];
+
+            Cell cell = grid[Change2DIndexTo1D(i, j)];
+            if ( cell.getValue() == 0 && cell.getPossibleValues().contains(value) ) 
+            {
+                modifiable = true;
+                grid[Change2DIndexTo1D(i, j)].setValue(value);
+            }
+            else
+            {
+                System.out.printf("erreur, l'entree [%d,%d] = %d est incompatible avec la grille\n", input[0], input[1], input[2]);
+            }
+        }
+        updatePossibleValues();
+    }
 }
