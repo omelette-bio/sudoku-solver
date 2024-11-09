@@ -21,7 +21,11 @@ class Main {
             if (!res)
             {
                 echecs++;
-                if ((echecs == 3) || (echecs > 1 && DRState.getCurIndex() == 2)) grid0.getInput();
+                if (echecs > 1 && DRState.getCurIndex() == 2)
+                {
+                    grid0.getInput();
+                    echecs = 0;
+                }
                 dr = DRState.next();
             }
             else echecs = 0;
