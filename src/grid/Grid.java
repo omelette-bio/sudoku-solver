@@ -11,10 +11,14 @@ public class Grid {
     private final Cell[][] columns = new Cell[9][9];
     private final Cell[][] squares = new Cell[9][9];
 
-    public Grid(int[] grid)
+    public Grid(int[] input_grid)
     {
         // le tableau principal
-        for (int i = 0; i < 81; i++) this.grid[i] = new Cell(grid[i], i);
+        for (int i = 0; i < 81; i++)
+        {
+            if (input_grid[i] == 0) { this.grid[i] = CellFactory.emptyCell(i); }
+            else { this.grid[i] = CellFactory.valueCell(input_grid[i], i); }
+        }
         // obtenir les lignes
         for (int j = 0; j < 81; j++) this.lines[j/9][j%9] = this.grid[j];
         for (int j = 0; j < 81; j++) this.columns[j%9][j/9] = this.grid[j];
@@ -55,6 +59,10 @@ public class Grid {
                 for (int j = 0; j < 9; j++) grid[i].removePossibleValue(lines[grid[i].getX_pos()][j].getValue());
                 for (int j = 0; j < 9; j++) grid[i].removePossibleValue(columns[grid[i].getY_pos()][j].getValue());
                 for (int j = 0; j < 9; j++) grid[i].removePossibleValue(squares[grid[i].getS_pos()][j].getValue());
+            }
+            else
+            {
+                grid[i].clearPossibleValues();
             }
         }
     }

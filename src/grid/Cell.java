@@ -7,16 +7,40 @@ public class Cell
     private int value; // 0 si pas de valeur et 1 a 9 sinon
 
     // tableau permettant de determiner ce qui est possible sur cette cellule (vide si aucune valeur)
-    HashSet<Integer> possible_values = new HashSet<>();
+    HashSet<Integer> possible_values = null;
 
     private final int x_pos;
     private final int y_pos;
     private final int s_pos;
     private final int s_x_pos;
 
+    public Cell(int pos)
+    {
+        this.value = 0;
+        possible_values = new HashSet<>();
+        for(int i = 1; i <= 9; i++) possible_values.add(i);
+        x_pos = pos/9;
+        y_pos = pos%9;
+        if ((x_pos >= 0) && (x_pos < 3)) {
+            if ((y_pos >= 0) && (y_pos < 3)) s_pos = 0;
+            else if ((y_pos >= 3) && (y_pos < 6)) s_pos = 1;
+            else s_pos = 2;
+        }
+        else if ((x_pos >= 3) && (x_pos < 6)) {
+            if ((y_pos >= 0) && (y_pos < 3)) s_pos = 3;
+            else if ((y_pos >= 3) && (y_pos < 6)) s_pos = 4;
+            else s_pos = 5;
+        }
+        else {
+            if ((y_pos >= 0) && (y_pos < 3)) s_pos = 6;
+            else if ((y_pos >= 3) && (y_pos < 6)) s_pos = 7;
+            else s_pos = 8;
+        }
+        s_x_pos = (x_pos%3)*3 + y_pos%3;
+    }
+
     public Cell(int value, int pos) {
         this.value = value;
-        for(int i = 1; i <= 9; i++) possible_values.add(i);
         x_pos = pos/9;
         y_pos = pos%9;
         if ((x_pos >= 0) && (x_pos < 3)) {
@@ -48,5 +72,6 @@ public class Cell
     public HashSet<Integer> getPossibleValues() { return possible_values; }
     public void removePossibleValue(int value) { possible_values.remove(value); }
     public void resetPossibleValues() { for(int i = 1; i <= 9; i++) possible_values.add(i); }
-    public void removeAll(HashSet<Integer> compare) { possible_values.removeAll(compare); }
+    public void clearPossibleValues() { possible_values = null; }
+    //public void removeAll(HashSet<Integer> compare) { possible_values.removeAll(compare); }
 }
