@@ -22,16 +22,16 @@ public class DR3 extends DeductionRule {
         boolean modified = false;
         for (int i=0; i<9; i++)
         {
-            modified = modified | processSection(grid.getLines()[i]);
-            modified = modified | processSection(grid.getCols()[i]);
-            modified = modified | processSection(grid.getSquares()[i]);
+            modified = modified | processSection(grid.getLines()[i], grid);
+            modified = modified | processSection(grid.getCols()[i], grid);
+            modified = modified | processSection(grid.getSquares()[i], grid);
         }
         grid.updatePossibleValues();
         grid.refreshStructure();
         return modified;
     }
 
-    private boolean processSection(Cell[] section)
+    private boolean processSection(Cell[] section, Grid grid)
     {
         HashMap<Integer, Integer> map_qte = new HashMap<>(
             Map.of(1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0)
@@ -55,6 +55,7 @@ public class DR3 extends DeductionRule {
             if (map_qte.get(k) == 1)
             {
                 section[map_index.get(k)].setValue(k);
+                grid.updatePossibleValues();
             }
         }
         return false;
